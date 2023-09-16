@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from lyricsgenius import Genius
 import requests
 import json
+import lyricModule
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///games.db'
@@ -44,15 +45,16 @@ def get_word():
 def validate_song():
     song_name = request.json.get('song_name')
     game_id = request.json.get('game_id')
+    
     # dummy code for now, replace with actual music lyrics database/API check.
     # going to fuzzy search genius for the song
     ourSong = genius.search_song(song_name)
     is_correct = False
     if ourSong:
-        if currentWord in ourSong.lyrics: # this .lyrics needs to be pruned
-            is_correct = True
+        if lyricModule.songContains(ourSong.id, currentWord):
+            return True
         else:
-            is_correct = False
+            return False
     else:
         is_correct = False # song not found
 
