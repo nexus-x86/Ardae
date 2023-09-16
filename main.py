@@ -50,6 +50,7 @@ def validate_song():
     is_correct = False
     if ourSong:
         if currentWord in ourSong.lyrics: # this .lyrics needs to be pruned
+            print(ourSong.lyrics)
             is_correct = True
         else:
             is_correct = False
