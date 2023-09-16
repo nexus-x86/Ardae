@@ -5,8 +5,8 @@ input.addEventListener("keydown", function(event) {
     // Check if the key pressed is Enter (key code 13)
     if (event.key === 'Enter') {
         const songInput = document.getElementById('songName');
-        songInput.value = "";
         // Call your function here or perform any desired action
         validateSong();
+        songInput.value = "";
     }
 });
