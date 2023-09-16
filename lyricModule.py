@@ -14,6 +14,16 @@ def refine(lyrics):
         close = new.find("]")
         
         new = new[0:open] + new[close+1:len(new)]
+
+    x = False
+    for i in range (len(new)-1, 0, -1):
+        if not new[i].isalpha():
+            x = True
+        elif (x == True):
+            new = new[0:i+1]
+            break
+
+    print(new)  
     return new
 
 def songContains(song, key):
