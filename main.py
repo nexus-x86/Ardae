@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from lyricsgenius import Genius
 import requests
 import json
+from init_word_db import *
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///games.db'
@@ -31,7 +32,7 @@ with app.app_context():
 def get_word():
     # put the dictionary api here, this is just dummy code for me
     import random
-    words = ['love', 'world', 'life', 'night', 'music'] 
+    words = word_list(150)
     global currentWord
     currentWord = random.choice(words)
 
