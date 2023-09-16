@@ -7,6 +7,8 @@ async function loadWordAndGameId() {
     word = data.word;
     gameId = data.game_id;
     document.getElementById('word').innerText = word;
+
+    window.gameId = gameId;
 }
 window.addEventListener('load', loadWordAndGameId);
 
