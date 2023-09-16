@@ -1,0 +1,2 @@
+from taipy import Gui
+
