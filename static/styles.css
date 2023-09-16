@@ -1,0 +1,22 @@
+body {
+    background-color: #fffae9; /* Set a background color */
+}
+
+.center {
+    text-align: center;
+}
+
+#songName {
+    border-radius: 8px;
+    background: #ffffff;
+    padding: 10px;
+    width: 200px;
+    height: 25px;
+}
+
+.container {
+    display: flex;
+    justify-content: center; /* Horizontal centering */
+    align-items: center; /* Vertical centering */
+    /* height: 100vh; Optional: Center within viewport height */
+}

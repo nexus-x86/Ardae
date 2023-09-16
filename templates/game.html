@@ -1,7 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head> 
+    <link rel="stylesheet" href="static\styles.css">
+</head>
+
 <body>
     <div>
-        <h2>Word: <span id="word"></span></h2>
-        <input type="text" id="songName" placeholder="Enter song name">
+        <h2 class = 'center'> Word: <span id="word"></span></h2>
+        
+        <div class='container'>
+            <input type="text" id="songName" class = 'center' placeholder="Enter song name">
+        </div>
+        
         <button onclick="validateSong()">Submit</button>
     </div>
 
@@ -10,3 +21,4 @@
     <script src="{{ url_for('static', filename='timer.js') }}"></script>
     <script src="{{ url_for('static', filename='game.js') }}"></script>
 </body>
+</html>
