@@ -9,10 +9,6 @@ async function loadWordAndGameId() {
     gameId = data.game_id;
     document.getElementById('word').innerText = word;
 
-    // clear the results
-    const resultsDiv = document.createElement("div");
-    resultsDiv.innerHTML = '';
-
     window.gameId = gameId; // Set the global gameId variable
 }
 
@@ -33,6 +29,7 @@ async function validateSong() {
 
 function displayResults(data) {
     const resultsDiv = document.createElement("div");
+    resultsDiv.id='res';
     resultsDiv.innerHTML = `
         <h3>Results</h3>
         <p>Correct Songs: ${data.correct_count}</p>
@@ -55,6 +52,11 @@ function startGame() {
 
 function restartGame() {
     stopTimer(); // Stop the current timer.
+    // clear the previous results
+    const resultsDiv = document.getElementById("res");
+    if (resultsDiv) {
+        resultsDiv.innerHTML = '';
+    }
     startGame(); // Re-initialize the game.
 }
 
