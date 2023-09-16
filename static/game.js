@@ -24,10 +24,13 @@ async function validateSong() {
         body: JSON.stringify({ song_name: songName, game_id: gameId })
     });
     const data = await response.json();
-    if(data.is_correct) {
+    if(data.is_correct == 1) {
         alert("Correct!");
-    } else {
+    } else if (data.is_correct == 0) {
         alert("Wrong!");
+    }
+    else{
+        alert("Already guessed");
     }
 }
 

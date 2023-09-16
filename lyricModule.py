@@ -22,8 +22,7 @@ def refine(lyrics):
         elif (x == True):
             new = new[0:i+1]
             break
-
-    print(new)  
+        
     return new
 
 def songContains(song, key):

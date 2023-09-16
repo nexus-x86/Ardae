@@ -26,7 +26,7 @@ class Game(db.Model):
 class Guess(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     song_name = db.Column(db.String(300), nullable=False)
-    is_correct = db.Column(db.Boolean, nullable=False)
+    is_correct = db.Column(db.Integer, nullable=False)
     game_id = db.Column(db.Integer, db.ForeignKey('game.id'), nullable=False)
 
 with app.app_context():
@@ -68,10 +68,12 @@ def fetch_song(song_name, retries=2):  # 2 retries by default
     for i in range(retries):
         try:
             song = genius.search_song(song_name)
-            if song in guessed:
-                print("Your can't guess the same thing more then once!")
-                return None
-            guessed.append(song)
+            if song != None:
+                if song.id in guessed:
+                    print("Your can't guess the same thing more then once!")
+                    return "nuh uh"
+                guessed.append(song.id)
+                print("Added " + str(song.id) + " to gussed songs.")
             return song
         except requests.exceptions.ReadTimeout:
             print(f"Request timeout. Retry attempt {i+1}...")
@@ -86,16 +88,19 @@ def validate_song():
     
     ourSong = fetch_song(song_name)
 
-    is_correct = False
-    if ourSong:
-        if lyricModule.songContains(ourSong.id, currentWord):
-            is_correct = True
-        else:
-            is_correct = False
-        #print(ourSong.lyrics)
+    is_correct = 0 # 3 means already guessed
+    if type(ourSong) == str:
+        is_correct = 3
     else:
-        print("Song fetch failed")
-        is_correct = False 
+        if ourSong:
+            if lyricModule.songContains(ourSong.id, currentWord):
+                is_correct = 1
+            else:
+                is_correct = 0
+            #print(ourSong.lyrics)
+        else:
+            print("Song fetch failed")
+            is_correct = 0 
 
 
     guess = Guess(song_name=song_name, is_correct=is_correct, game_id=game_id)
