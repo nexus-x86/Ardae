@@ -1,6 +1,14 @@
+let timerInterval;
+
+function stopTimer() {
+    clearInterval(timerInterval);
+}
+
 function startTimer(duration, display) {
+    stopTimer(); // Ensure any existing timer is stopped.
+    
     var timer = duration, minutes, seconds;
-    setInterval(function () {
+    timerInterval = setInterval(async function() {
         minutes = parseInt(timer / 60, 10);
         seconds = parseInt(timer % 60, 10);
 
@@ -10,17 +18,25 @@ function startTimer(duration, display) {
         display.textContent = minutes + ":" + seconds;
 
         if (--timer < 0) {
-            timer = 0; // Timer stops at 0:00
-            // You can add additional actions here when the timer reaches 0
+            timer = 0;
+            stopTimer();
+
+            const response = await fetch(`/timer-done?game_id=${gameId}`);
+            const data = await response.json();
+
+            if (!displayedResults) {
+                displayedResults = true;
+                displayResults(data);
+            }
+
+            document.getElementById('restartButton').style.display = 'block'; // Show the restart button.
         }
     }, 1000);
 }
 
-// Start the timer when the page loads
+// Start the timer when the start button is pressed
 function startTimerOnLoad() {
     var oneMinute = 59, // 60 seconds
         display = document.querySelector('#timer');
     startTimer(oneMinute, display);
 }
-window.addEventListener('load', startTimerOnLoad);
-

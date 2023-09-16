@@ -6,6 +6,8 @@
 </head>
 
 <body>
+    <button id="startButton" onclick="startGame()">Start</button>
+    <button id="restartButton" onclick="restartGame()" style="display:none">Restart</button>
     <div>
         <h2 class = 'center'> Word: <span id="word"></span></h2>
         
@@ -18,7 +20,7 @@
 
     <div id="timer">01:00</div>
 
-    <script src="{{ url_for('static', filename='timer.js') }}"></script>
     <script src="{{ url_for('static', filename='game.js') }}"></script>
+    <script src="{{ url_for('static', filename='timer.js') }}"></script>
 </body>
 </html>
