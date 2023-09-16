@@ -27,6 +27,7 @@ def get_word():
     # put the dictionary api here, this is just dummy code for me
     import random
     words = ['love', 'world', 'life', 'night', 'music']
+    global currentWord
     currentWord = random.choice(words)
 
     game = Game(word=currentWord)
