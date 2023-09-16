@@ -73,9 +73,9 @@ def validate_song():
     is_correct = False
     if ourSong:
         if lyricModule.songContains(ourSong.id, currentWord):
-            return True
+            is_correct = True
         else:
-            return False
+            is_correct = False
         print(ourSong.lyrics)
     else:
         is_correct = False # song not found
