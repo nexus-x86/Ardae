@@ -1,13 +1,16 @@
 let word;
 let gameId;
 
-window.onload = async () => {
+async function loadWordAndGameId() {
     const response = await fetch('/get-word');
     const data = await response.json();
     word = data.word;
     gameId = data.game_id;
     document.getElementById('word').innerText = word;
 }
+window.addEventListener('load', loadWordAndGameId);
+
+
 
 async function validateSong() {
     const songName = document.getElementById('songName').value;

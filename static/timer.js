@@ -17,8 +17,10 @@ function startTimer(duration, display) {
 }
 
 // Start the timer when the page loads
-window.onload = function () {
+function startTimerOnLoad() {
     var oneMinute = 59, // 60 seconds
         display = document.querySelector('#timer');
     startTimer(oneMinute, display);
-};
+}
+window.addEventListener('load', startTimerOnLoad);
+
