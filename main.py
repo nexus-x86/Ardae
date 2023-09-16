@@ -12,7 +12,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///games.db'
 db = SQLAlchemy(app)
 
 secretFile = json.load(open("secret.json"))
-genius = Genius(secretFile["clientAccessToken"])
+genius = Genius(secretFile["clientAccessToken"], timeout = 15)
 
 currentWord = ""
 
@@ -62,6 +62,17 @@ def get_word():
     db.session.commit()
     return jsonify(word=currentWord, game_id=game.id)
 
+def fetch_song(song_name, retries=2):  # 2 retries by default
+    for i in range(retries):
+        try:
+            song = genius.search_song(song_name)
+            return song
+        except requests.exceptions.ReadTimeout:
+            print(f"Request timeout. Retry attempt {i+1}...")
+
+    print(f"Failed to fetch song after {retries} attempts.")
+    return None
+
 @app.route('/validate-song', methods=['POST'])
 def validate_song():
     song_name = request.json.get('song_name')
@@ -69,16 +80,20 @@ def validate_song():
     
     # dummy code for now, replace with actual music lyrics database/API check.
     # going to fuzzy search genius for the song
-    ourSong = genius.search_song(song_name)
+    
+    # ourSong = genius.search_song(song_name)
+    ourSong = fetch_song(song_name)
+
     is_correct = False
     if ourSong:
         if lyricModule.songContains(ourSong.id, currentWord):
             is_correct = True
         else:
             is_correct = False
-        print(ourSong.lyrics)
+        #print(ourSong.lyrics)
     else:
-        is_correct = False # song not found
+        print("Song fetch failed")
+        is_correct = False 
 
 
     guess = Guess(song_name=song_name, is_correct=is_correct, game_id=game_id)
