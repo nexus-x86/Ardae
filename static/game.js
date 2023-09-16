@@ -17,7 +17,9 @@ async function validateSong() {
         body: JSON.stringify({ song_name: songName, game_id: gameId })
     });
     const data = await response.json();
-    if(data.is_correct) {
+    if (data.is_correct == "-1") {
+        alert("cant find song");
+    } else if(data.is_correct) {
         alert("Correct!");
     } else {
         alert("Wrong!");
