@@ -17,9 +17,10 @@
         
         <button onclick="validateSong()">Submit</button>
     </div>
-
+    
     <div id="timer">01:00</div>
 
+    <script src = "{{ url_for('static', filename='enter.js') }}"></script>
     <script src="{{ url_for('static', filename='game.js') }}"></script>
     <script src="{{ url_for('static', filename='timer.js') }}"></script>
 </body>

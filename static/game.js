@@ -9,6 +9,10 @@ async function loadWordAndGameId() {
     gameId = data.game_id;
     document.getElementById('word').innerText = word;
 
+    // clear the results
+    const resultsDiv = document.createElement("div");
+    resultsDiv.innerHTML = '';
+
     window.gameId = gameId; // Set the global gameId variable
 }
 
