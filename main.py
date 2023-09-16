@@ -16,6 +16,8 @@ genius = Genius(secretFile["clientAccessToken"], timeout = 15)
 
 currentWord = ""
 
+guessed = []
+
 class Game(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     word = db.Column(db.String(100), nullable=False)
@@ -66,6 +68,10 @@ def fetch_song(song_name, retries=2):  # 2 retries by default
     for i in range(retries):
         try:
             song = genius.search_song(song_name)
+            if song in guessed:
+                print("Your can't guess the same thing more then once!")
+                return None
+            guessed.append(song)
             return song
         except requests.exceptions.ReadTimeout:
             print(f"Request timeout. Retry attempt {i+1}...")
@@ -78,10 +84,6 @@ def validate_song():
     song_name = request.json.get('song_name')
     game_id = request.json.get('game_id')
     
-    # dummy code for now, replace with actual music lyrics database/API check.
-    # going to fuzzy search genius for the song
-    
-    # ourSong = genius.search_song(song_name)
     ourSong = fetch_song(song_name)
 
     is_correct = False
