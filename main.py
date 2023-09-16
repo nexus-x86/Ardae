@@ -54,7 +54,7 @@ def validate_song():
         else:
             is_correct = False
     else:
-        return "-1" # song not found
+        is_correct = False # song not found
 
 
     guess = Guess(song_name=song_name, is_correct=is_correct, game_id=game_id)
