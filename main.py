@@ -4,6 +4,7 @@ from lyricsgenius import Genius
 import requests
 import json
 from init_word_db import *
+import random
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///games.db'
@@ -28,10 +29,29 @@ class Guess(db.Model):
 with app.app_context():
     db.create_all()
 
+@app.route('/timer-done', methods=['GET'])
+def timerDone():
+    game_id = request.args.get('game_id')
+    if not game_id:
+        return jsonify(error = "Game ID is required!"),400
+    guesses = Guess.query.filter_by(game_id=game_id).all()
+    if not guesses:
+        return jsonify(error = "No guesses for the provided game ID"),
+    correct_guesses = [guess for guess in guesses if guess.is_correct]
+    incorrect_guesses = [guess for guess in guesses if not guess.is_correct ]
+
+    response = {
+        "correct_count": len(correct_guesses),
+        "incorrect_count": len(incorrect_guesses),
+        "correct_songs": [{"song_name": guess.song_name} for guess in correct_guesses],
+        "incorrect_songs": [{"song_name": guess.song_name} for guess in incorrect_guesses]
+    }
+
+    return jsonify(response)
+
 @app.route('/get-word', methods=['GET'])
 def get_word():
     # put the dictionary api here, this is just dummy code for me
-    import random
     words = word_list(150)
     global currentWord
     currentWord = random.choice(words)
@@ -51,10 +71,10 @@ def validate_song():
     is_correct = False
     if ourSong:
         if currentWord in ourSong.lyrics: # this .lyrics needs to be pruned
-            print(ourSong.lyrics)
             is_correct = True
         else:
             is_correct = False
+        print(ourSong.lyrics)
     else:
         is_correct = False # song not found
 
