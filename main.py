@@ -109,6 +109,13 @@ def validate_song():
     db.session.commit()
     return jsonify(is_correct=is_correct)
 
+@app.route('/reset', methods = ['GET'])
+def reset():
+    global guessed
+    guessed = []
+    print("Guesses reset")
+    return 'testresponse', 204  # HTTP status code 204 (No Content)
+
 @app.route('/')
 def index():
     return render_template('game.html')

@@ -44,13 +44,25 @@ function displayResults(data) {
     document.body.appendChild(resultsDiv);
 }
 
-function startGame() {
+async function startGame() {
     loadWordAndGameId(); // Fetch the word and gameId.
     document.getElementById('word').style.display = 'block'; // Show the word.
     startTimerOnLoad(); // Start the timer.
 
     document.getElementById('startButton').style.display = 'none'; // Hide start button.
     document.getElementById('restartButton').style.display = 'block'; // Show restart button.
+
+    const response = await fetch('/reset')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        console.log('Reset successful');
+        // You can add further handling if needed
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 }
 
 function restartGame() {
