@@ -36,6 +36,8 @@ function startTimer(duration, display) {
 
 // Start the timer when the start button is pressed
 function startTimerOnLoad() {
+    var t = document.getElementById('timer');
+    t.innerText = '01:00';
     var oneMinute = 59, // 60 seconds
         display = document.querySelector('#timer');
     startTimer(oneMinute, display);
