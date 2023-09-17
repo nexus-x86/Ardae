@@ -21,13 +21,10 @@ function startTimer(duration, display) {
             timer = 0;
             stopTimer();
 
-            const response = await fetch(`/timer-done?game_id=${gameId}`);
+            const response = await fetch(`/timer-done`);
             const data = await response.json();
 
-            if (!displayedResults) {
-                displayedResults = true;
-                displayResults(data);
-            }
+            displayResults(data);
 
             document.getElementById('restartButton').style.display = 'block'; // Show the restart button.
         }

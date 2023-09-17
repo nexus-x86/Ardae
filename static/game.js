@@ -1,15 +1,10 @@
 let word;
-let gameId;
-let displayedResults = false;
 
-async function loadWordAndGameId() {
+async function loadWord() {
     const response = await fetch('/get-word');
     const data = await response.json();
     word = data.word;
-    gameId = data.game_id;
     document.getElementById('word').innerText = word;
-
-    window.gameId = gameId; // Set the global gameId variable
 }
 
 async function validateSong() {
@@ -17,7 +12,7 @@ async function validateSong() {
     const response = await fetch('/validate-song', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ song_name: songName, game_id: gameId })
+        body: JSON.stringify({ song_name: songName})
     });
     const data = await response.json();
     if(data.is_correct == 1) {
@@ -53,7 +48,7 @@ async function startGame() {
     T.style.display = "block";
 
     document.getElementById("songName").removeAttribute("readonly");
-    loadWordAndGameId(); // Fetch the word and gameId.
+    loadWord(); // Fetch the word
     document.getElementById('word').style.display = 'block'; // Show the word.
     startTimerOnLoad(); // Start the timer.
 

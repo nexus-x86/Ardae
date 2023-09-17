@@ -27,7 +27,7 @@ def refine(lyrics):
 
 def songContains(song, key):
     lyrics = refine(str(genius.lyrics(song)))
-    if(lyrics.find(key) != -1):
+    if(lyrics.find(" " + key + " ") != -1  or lyrics.find(" " + key + "s ") != -1 or lyrics.find(" " + key + "ing ") != -1 or lyrics.find(" " + key[0:len(key)-1] + "s ") != -1):
         return True
     else:
         return False

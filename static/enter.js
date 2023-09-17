@@ -6,7 +6,9 @@ input.addEventListener("keydown", function(event) {
     if (event.key === 'Enter') {
         const songInput = document.getElementById('songName');
         // Call your function here or perform any desired action
-        validateSong();
+        if(songInput.value != ""){
+            validateSong();
+        }
         songInput.value = "";
     }
 });
