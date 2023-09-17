@@ -4,7 +4,7 @@ async function loadWord() {
     const response = await fetch('/get-word');
     const data = await response.json();
     word = data.word;
-    document.getElementById('word').innerText = word;
+    document.getElementById('word').innerText = 'Word: \'' + word + '\'';
 }
 
 async function validateSong() {
@@ -42,14 +42,13 @@ function displayResults(data) {
 async function startGame() {
     var T = document.getElementById("timer");
     T.style.display = "block";  // <-- Set it to block
-    var T = document.getElementById('w');
+    var T = document.getElementById('word');
     T.style.display = "block";
     var T = document.getElementById('songName');
     T.style.display = "block";
 
     document.getElementById("songName").removeAttribute("readonly");
     loadWord(); // Fetch the word
-    document.getElementById('word').style.display = 'block'; // Show the word.
     startTimerOnLoad(); // Start the timer.
 
     document.getElementById('startButton').style.display = 'none'; // Hide start button.

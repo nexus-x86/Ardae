@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request, jsonify
-from flask_sqlalchemy import SQLAlchemy
 from lyricsgenius import Genius
 import requests
 import json
@@ -17,10 +16,11 @@ currentWord = ""
 guessed = []
 
 class Guess():
-    def __init__(self, guess_name, song_name, is_correct):
+    def __init__(self, guess_name, song_name, is_correct, song_image):
         self.song_name = song_name
         self.is_correct = is_correct
         self.guess_name = guess_name
+        self.song_image = song_image
 
 guesses = []
 
@@ -89,7 +89,7 @@ def validate_song():
             print("Song fetch failed")
             is_correct = 0 
 
-    guess = Guess(song_name, ourSong.title, is_correct)
+    guess = Guess(song_name, ourSong.title, is_correct, ourSong.song_art_image_thumbnail_url)
 
     global guesses
     guesses.append(guess)

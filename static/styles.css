@@ -1,8 +1,5 @@
 body {
-    background-color: #fffae9; /* Set a background color */
-}
-
-.center {
+    background-color: #fffae9;
     text-align: center;
 }
 
@@ -19,7 +16,23 @@ body {
 }
 .container {
     display: flex;
-    justify-content: center; /* Horizontal centering */
+    justify-content: center;
     align-items: center; /* Vertical centering */
-    /* height: 100vh; Optional: Center within viewport height */
+}
+
+#res{
+    text-align: center;
+    align-items: center;
+}
+.songImages{
+    width: 100px;
+    height: 100px;
+}
+
+#title{
+    display: inline;
+    text-align: center;
+
+    height: auto; 
+    width: 375px; 
 }
