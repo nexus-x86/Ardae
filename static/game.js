@@ -3,7 +3,7 @@ let word;
 async function loadWord() {
     const response = await fetch('/get-word');
     const data = await response.json();
-    word = "never";
+    word = data.word;
     document.getElementById('word').innerText = 'Word: \'' + word + '\'';
 }
 
