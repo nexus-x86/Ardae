@@ -16,11 +16,11 @@ currentWord = ""
 guessed = []
 
 class Guess():
-    def __init__(self, guess_name, song_name, is_correct, song_image):
+    def __init__(self, guess_name, song_name, is_correct, song_artist):
         self.song_name = song_name
         self.is_correct = is_correct
         self.guess_name = guess_name
-        self.song_image = song_image
+        self.song_artist = song_artist
 
 guesses = []
 
@@ -37,9 +37,11 @@ def timerDone():
     response = {
         "correct_count": len(correct_guesses),
         "incorrect_count": len(incorrect_guesses),
-        "correct_songs": [{"song_name": guess.song_name} for guess in correct_guesses],
-        "incorrect_songs": [{"song_name": guess.song_name} for guess in incorrect_guesses]
+        "correct_songs": [{"song_name": guess.song_name + " by " + guess.song_artist} for guess in correct_guesses],
+        "incorrect_songs": [{"song_name": guess.song_name + " by " + guess.song_artist} for guess in incorrect_guesses]
     }
+
+    guesses = [] # resets guesses for next game
 
     return jsonify(response)
 
@@ -89,7 +91,7 @@ def validate_song():
             print("Song fetch failed")
             is_correct = 0 
 
-    guess = Guess(song_name, ourSong.title, is_correct, ourSong.song_art_image_thumbnail_url)
+    guess = Guess(song_name, ourSong.title, is_correct, ourSong.artist)
 
     global guesses
     guesses.append(guess)

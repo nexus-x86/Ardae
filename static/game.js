@@ -3,7 +3,7 @@ let word;
 async function loadWord() {
     const response = await fetch('/get-word');
     const data = await response.json();
-    word = data.word;
+    word = "never";
     document.getElementById('word').innerText = 'Word: \'' + word + '\'';
 }
 
@@ -12,17 +12,9 @@ async function validateSong() {
     const response = await fetch('/validate-song', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ song_name: songName})
+        body: JSON.stringify({ song_name: songName, broilowkeydontcareanymore : 1})
     });
     const data = await response.json();
-    if(data.is_correct == 1) {
-        alert("Correct!");
-    } else if (data.is_correct == 0) {
-        alert("Wrong!");
-    }
-    else{
-        alert("Already guessed");
-    }
 }
 
 function displayResults(data) {

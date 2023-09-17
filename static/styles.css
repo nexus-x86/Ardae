@@ -36,3 +36,8 @@ body {
     height: auto; 
     width: 375px; 
 }
+
+
+ul {
+    list-style-type: none;
+  }
