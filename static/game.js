@@ -45,6 +45,7 @@ function displayResults(data) {
 }
 
 async function startGame() {
+    document.getElementById("songName").removeAttribute("readonly");
     loadWordAndGameId(); // Fetch the word and gameId.
     document.getElementById('word').style.display = 'block'; // Show the word.
     startTimerOnLoad(); // Start the timer.
