@@ -3,6 +3,7 @@
 
 <head> 
     <link rel="stylesheet" href="static\styles.css">
+    <link rel="stylesheet" href="static\button.css">
 </head>
 
 <body>
@@ -18,7 +19,12 @@
         <!-- <button onclick="validateSong()">Submit</button> -->
     </div>
     
-    <div id="timer">01:00</div>
+    <br>
+
+    <div class='container'>
+        <div id="timer">01:00</div>
+    </div>
+    
 
     <script src = "{{ url_for('static', filename='enter.js') }}"></script>
     <script src="{{ url_for('static', filename='game.js') }}"></script>

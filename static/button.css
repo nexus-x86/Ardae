@@ -1,0 +1,85 @@
+.square-side {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    border: 120px solid transparent;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    height: 100%;
+    width: 0;
+    z-index: -1;
+    transition: all .1s ease-out;
+    -webkit-transition: all .1s ease-out;
+}
+.trapezoid-side {
+    border-top-width: 10px;
+    border-bottom-width: 10px;
+    border-radius: .2em;
+    top: -10px;
+    border: 6px;
+}
+button {
+    font-size: 2em;
+    color: rgb(0, 0, 0);
+    display: block;
+    margin: 2em auto;
+    height: 100px;
+    width: 240px;
+    background: rgb(255, 255, 255);
+    border: 8x;
+    position: relative;
+    transition: all .2s ease-out;
+    -webkit-transition: all .2s ease-out;
+    /* box-shadow: 0 0 .25em #ababab; */
+    cursor: pointer;
+    outline: none;
+    padding: 10px;
+}
+button::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    border: 120px;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    height: 100%;
+    width: 0;
+    z-index: -1;
+    transition: all .1s ease-out;
+    -webkit-transition: all .1s ease-out;
+    border-left-color: rgb(255, 255, 255);
+}
+button::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    border: 120px ;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    height: 100%;
+    width: 0;
+    z-index: -1;
+    transition: all .1s ease-out;
+    -webkit-transition: all .1s ease-out;
+    border-right-color: rgb(255, 255, 255);
+}
+button:active {
+    transform: scale(1.2,.8);
+}
+button:active::before {
+    border-top-width: 10px;
+    border-bottom-width: 10px;
+    border-radius: .2em;
+    top: -10px;
+    border-left-color: rgb(255, 255, 255);
+}
+button:active::after {
+    border-top-width: 10px;
+    border-bottom-width: 10px;
+    border-radius: .2em;
+    top: -10px;
+    border-right-color: rgb(255, 255, 255);
+}
