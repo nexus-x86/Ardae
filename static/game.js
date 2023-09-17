@@ -45,6 +45,13 @@ function displayResults(data) {
 }
 
 async function startGame() {
+    var T = document.getElementById("timer");
+    T.style.display = "block";  // <-- Set it to block
+    var T = document.getElementById('w');
+    T.style.display = "block";
+    var T = document.getElementById('songName');
+    T.style.display = "block";
+
     document.getElementById("songName").removeAttribute("readonly");
     loadWordAndGameId(); // Fetch the word and gameId.
     document.getElementById('word').style.display = 'block'; // Show the word.

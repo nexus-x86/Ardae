@@ -10,10 +10,10 @@
     <button id="startButton" onclick="startGame()">Start</button>
     <button id="restartButton" onclick="restartGame()" style="display:none">Restart</button>
     <div>
-        <h2 class = 'center'> Word: <span id="word"></span></h2>
+        <h2 class = 'center' style="display:none" id = 'w'> Word: <span id="word"></span></h2>
         
         <div class='container'>
-            <input type="text" id="songName" class = 'center' placeholder="Enter song name" readonly>
+            <input style="display:none" type="text" id="songName" class = 'center' placeholder="Enter song name" readonly>
         </div>
         
         <!-- <button onclick="validateSong()">Submit</button> -->
@@ -22,7 +22,7 @@
     <br>
 
     <div class='container'>
-        <div id="timer">01:00</div>
+        <div id="timer" style="display:none">01:00</div>
     </div>
     
 
