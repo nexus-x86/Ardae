@@ -55,7 +55,7 @@ def timerDone():
 @app.route('/get-word', methods=['GET'])
 def get_word():
     # put the dictionary api here, this is just dummy code for me
-    words = word_list(150)
+    words = word_list(50)
     global currentWord
     currentWord = random.choice(words)
 
