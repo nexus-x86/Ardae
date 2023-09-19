@@ -22,6 +22,10 @@ def refine(lyrics):
         elif (x == True):
             new = new[0:i+1]
             break
+
+    punctuation = [".", ",", "!", "?", ";", ":", "(", ")"]
+    for i in punctuation:
+        new.replace(i, "")
         
     return new
 
